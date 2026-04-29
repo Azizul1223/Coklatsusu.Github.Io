@@ -296,12 +296,12 @@ body {
 }
 
 .steam {
-  background: linear-gradient(135deg, #1b2838, #2a475e);
+  background: linear-gradient(to bottom, #0a1628, #1a90d4);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .roblox {
-  background: linear-gradient(135deg, #e2231a, #b01212);
+  background: linear-gradient(135deg, #4fc3f7, #0288d1);
 }
 
 .saweria {
