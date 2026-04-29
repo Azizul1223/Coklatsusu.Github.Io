@@ -15,37 +15,35 @@
          Cara pakai:
          1. Taruh file foto kamu (JPG/PNG) di folder
             yang sama dengan index.html ini
-         2. Ganti "foto-profil.jpg" di bawah dengan
-            nama file foto kamu
+         2. Ganti "foto-profil.jpg" dengan nama file foto kamu
          Contoh: src="foto-saya.png"
     ============================================ -->
-    <div class="avatar-wrap">
+    <div class="avatar-wrap" id="avatar-wrap">
       <img
         src="foto-profil.jpg"
-        alt="CoklatSusu"
+        alt="Coklatssss"
         class="avatar avatar-img"
         onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"
       />
-      <!-- Fallback emoji kalau foto tidak ditemukan -->
       <div class="avatar avatar-fallback" id="avatar-fallback" style="display:none;">🎮</div>
       <div class="online-dot"></div>
     </div>
 
     <!-- NAMA & BIO -->
-    <div class="profile-name">CoklatSusu</div>
+    <div class="profile-name">Coklatssss</div>
     <div class="profile-bio">Content Creator</div>
 
     <!-- BADGES -->
     <div class="badges">
       <span class="badge green">Kang Ngedit (kalau mood)</span>
-      <span class="badge blue">ID 🇮🇩</span>
+      <span class="badge blue">ID</span>
     </div>
 
     <!-- GRID LINK -->
     <div class="links">
 
       <!-- INSTAGRAM -->
-      <a href="https://instagram.com/coklatssss" class="card instagram">
+      <a href="https://instagram.com/coklatssss" class="card instagram" data-sound="instagram">
         <div class="card-icon">
           <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="2" y="2" width="20" height="20" rx="6" ry="6" stroke="white" stroke-width="2" fill="none"/>
@@ -58,7 +56,7 @@
       </a>
 
       <!-- TIKTOK -->
-      <a href="https://tiktok.com/@coklatssss0" class="card tiktok">
+      <a href="https://tiktok.com/@coklatssss0" class="card tiktok" data-sound="tiktok">
         <div class="card-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
             <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5
@@ -72,14 +70,12 @@
       </a>
 
       <!-- SAWERIA -->
-      <a href="https://saweria.co/coklatssss" class="card saweria">
+      <a href="https://saweria.co/coklatssss" class="card saweria" data-sound="saweria">
         <div class="card-icon">
           <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Koin -->
             <circle cx="38" cy="20" r="14" fill="#f59e0b" stroke="#92400e" stroke-width="2"/>
             <circle cx="38" cy="20" r="10" fill="#fbbf24"/>
             <text x="38" y="25" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e" font-family="Arial, sans-serif">S</text>
-            <!-- Tangan terbuka -->
             <path d="M6 46 C6 40, 12 38, 18 38 L28 38 L36 42 L44 42 C47 42, 49 44, 49 46 C49 48, 47 50, 44 50 L26 50" stroke="#92400e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             <path d="M6 46 L6 54" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
           </svg>
@@ -89,7 +85,7 @@
       </a>
 
       <!-- COMING SOON -->
-      <a href="#" class="card coming-soon">
+      <a href="#" class="card coming-soon" data-sound="locked">
         <div class="card-icon">🔒</div>
         <div class="card-label">Coming Soon</div>
         <div class="card-sub">Stay tuned</div>
@@ -102,6 +98,154 @@
     <div class="footer">© 2026 CoklatSusu · All rights reserved</div>
 
   </div>
+
+  <script>
+    // ============================================================
+    //  SOUND ENGINE — Web Audio API (tidak butuh file eksternal)
+    // ============================================================
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let ctx = null;
+
+    // Buat AudioContext saat pertama kali ada interaksi user
+    function getCtx() {
+      if (!ctx) ctx = new AudioCtx();
+      if (ctx.state === 'suspended') ctx.resume();
+      return ctx;
+    }
+
+    // --- Helper: buat nada pendek ---
+    function playTone({ freq = 440, type = 'sine', duration = 0.12, volume = 0.4, delay = 0, attack = 0.01, decay = 0.05 }) {
+      const c = getCtx();
+      const osc = c.createOscillator();
+      const gain = c.createGain();
+      osc.connect(gain);
+      gain.connect(c.destination);
+
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, c.currentTime + delay);
+
+      gain.gain.setValueAtTime(0, c.currentTime + delay);
+      gain.gain.linearRampToValueAtTime(volume, c.currentTime + delay + attack);
+      gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + duration);
+
+      osc.start(c.currentTime + delay);
+      osc.stop(c.currentTime + delay + duration + 0.05);
+    }
+
+    // --- Helper: noise pendek (gesekan / klik) ---
+    function playNoise({ duration = 0.08, volume = 0.15, delay = 0 }) {
+      const c = getCtx();
+      const bufSize = c.sampleRate * duration;
+      const buf = c.createBuffer(1, bufSize, c.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
+
+      const src = c.createBufferSource();
+      src.buffer = buf;
+
+      const gain = c.createGain();
+      gain.gain.setValueAtTime(volume, c.currentTime + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + duration);
+
+      const filter = c.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.value = 1200;
+
+      src.connect(filter);
+      filter.connect(gain);
+      gain.connect(c.destination);
+      src.start(c.currentTime + delay);
+      src.stop(c.currentTime + delay + duration + 0.05);
+    }
+
+    // ============================================================
+    //  DEFINISI SUARA PER AKSI
+    // ============================================================
+
+    const sounds = {
+
+      // Halaman pertama dibuka — jingle naik ringan
+      pageLoad() {
+        [523, 659, 784, 1047].forEach((f, i) => {
+          playTone({ freq: f, type: 'triangle', duration: 0.18, volume: 0.25, delay: i * 0.1 });
+        });
+      },
+
+      // Hover card — klik lembut
+      hover() {
+        playTone({ freq: 880, type: 'sine', duration: 0.07, volume: 0.18, attack: 0.005 });
+      },
+
+      // Klik Instagram — "pop" ceria
+      instagram() {
+        playTone({ freq: 660, type: 'sine',     duration: 0.12, volume: 0.35 });
+        playTone({ freq: 990, type: 'triangle', duration: 0.12, volume: 0.2, delay: 0.07 });
+      },
+
+      // Klik TikTok — beat pendek
+      tiktok() {
+        playNoise({ duration: 0.05, volume: 0.2 });
+        playTone({ freq: 220, type: 'square', duration: 0.1, volume: 0.3, delay: 0.04 });
+        playTone({ freq: 440, type: 'square', duration: 0.08, volume: 0.2, delay: 0.12 });
+      },
+
+      // Klik Saweria — suara koin jatuh
+      saweria() {
+        [1047, 1319, 1568].forEach((f, i) => {
+          playTone({ freq: f, type: 'triangle', duration: 0.14, volume: 0.28, delay: i * 0.06 });
+        });
+        playNoise({ duration: 0.04, volume: 0.1, delay: 0.03 });
+      },
+
+      // Klik Coming Soon — suara "dikunci" / error kecil
+      locked() {
+        playTone({ freq: 300, type: 'sawtooth', duration: 0.1,  volume: 0.3 });
+        playTone({ freq: 250, type: 'sawtooth', duration: 0.12, volume: 0.25, delay: 0.09 });
+      },
+
+      // Klik avatar — suara notifikasi
+      avatar() {
+        playTone({ freq: 784, type: 'sine',     duration: 0.1,  volume: 0.3 });
+        playTone({ freq: 988, type: 'sine',     duration: 0.1,  volume: 0.25, delay: 0.1 });
+        playTone({ freq: 1175, type: 'triangle',duration: 0.15, volume: 0.2,  delay: 0.2 });
+      }
+    };
+
+    // ============================================================
+    //  PASANG EVENT LISTENER
+    // ============================================================
+
+    // Jalankan suara page load setelah halaman siap
+    window.addEventListener('load', () => {
+      // Sedikit delay supaya browser sudah stabil
+      setTimeout(() => sounds.pageLoad(), 400);
+    });
+
+    // Klik & hover setiap card
+    document.querySelectorAll('.card').forEach(card => {
+      const soundName = card.dataset.sound;
+
+      // Hover
+      card.addEventListener('mouseenter', () => sounds.hover());
+
+      // Klik (mousedown supaya terasa responsif)
+      card.addEventListener('mousedown', () => {
+        if (sounds[soundName]) sounds[soundName]();
+      });
+
+      // Touch (mobile)
+      card.addEventListener('touchstart', () => {
+        sounds.hover();
+        if (sounds[soundName]) sounds[soundName]();
+      }, { passive: true });
+    });
+
+    // Klik avatar
+    const avatarWrap = document.getElementById('avatar-wrap');
+    avatarWrap.addEventListener('click', () => sounds.avatar());
+    avatarWrap.addEventListener('touchstart', () => sounds.avatar(), { passive: true });
+
+  </script>
 
 </body>
 </html>
