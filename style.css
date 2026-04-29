@@ -292,11 +292,13 @@ body {
 
 .tiktok {
   background: linear-gradient(135deg, #1a1a2e, #16213e);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  outline: 1px solid rgba(255, 255, 255, 0.1);
+  outline-offset: -1px;
 }
 
 .steam {
-  background: linear-gradient(to bottom, #0a1628, #1a90d4);
+  background: linear-gradient(to bottom, #0d2137, #1a7ab8);
+  border: none;
 }
 
 .roblox {
