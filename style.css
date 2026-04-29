@@ -183,7 +183,7 @@ body::before {
   display: block;
   margin-top: 6px;
   height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent);
+  background: linear-gradient(90deg, rgba(255,255,255,0.5), transparent);
 }
 
 /* =====================
