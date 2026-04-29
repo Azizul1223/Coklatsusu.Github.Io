@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coklatssss cihuy</title>
+  <title>Coklatssss </title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="favicon-180.png">
 </head>
 <body>
 
@@ -224,6 +229,61 @@
     const avatarWrap = document.getElementById('avatar-wrap');
     avatarWrap.addEventListener('click', () => sounds.avatar());
     avatarWrap.addEventListener('touchstart', () => sounds.avatar(), { passive: true });
+  </script>
+
+  <!-- Particle Canvas -->
+  <canvas id="particles" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx2 = canvas.getContext('2d');
+    let W, H, stars = [];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+
+    function randomStar() {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.2 + 0.2,
+        alpha: Math.random() * 0.5 + 0.1,
+        speed: Math.random() * 0.25 + 0.05,
+        drift: (Math.random() - 0.5) * 0.15,
+        twinkleSpeed: Math.random() * 0.008 + 0.003,
+        twinkleOffset: Math.random() * Math.PI * 2,
+      };
+    }
+
+    function initStars() {
+      const count = Math.floor((W * H) / 6000);
+      stars = Array.from({ length: Math.min(count, 120) }, randomStar);
+    }
+
+    function draw(t) {
+      ctx2.clearRect(0, 0, W, H);
+      for (const s of stars) {
+        const twinkle = s.alpha * (0.6 + 0.4 * Math.sin(t * s.twinkleSpeed + s.twinkleOffset));
+        ctx2.beginPath();
+        ctx2.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx2.fillStyle = `rgba(180,210,255,${twinkle})`;
+        ctx2.fill();
+
+        s.y -= s.speed;
+        s.x += s.drift;
+
+        if (s.y < -4) { s.y = H + 4; s.x = Math.random() * W; }
+        if (s.x < -4) s.x = W + 4;
+        if (s.x > W + 4) s.x = -4;
+      }
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    initStars();
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    requestAnimationFrame(draw);
   </script>
 
 </body>
