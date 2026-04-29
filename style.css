@@ -17,11 +17,20 @@ body {
   justify-content: center;
   align-items: center;
   padding: 40px 24px;
-
-  background: linear-gradient(270deg, #0f172a, #1e293b, #020617, #0f2a1e);
-  background-size: 600% 600%;
-  animation: gradientMove 10s ease infinite;
   color: white;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* GIF background dengan blur */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: url('bg.gif') center center / cover no-repeat;
+  filter: blur(6px) brightness(0.45);
+  transform: scale(1.05);
+  z-index: -1;
 }
 
 /* =====================
@@ -334,12 +343,6 @@ body {
 /* =====================
    ANIMASI
 ===================== */
-@keyframes gradientMove {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
