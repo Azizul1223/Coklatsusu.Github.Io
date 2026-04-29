@@ -10,32 +10,55 @@
 
   <div class="container">
 
-    <!-- FOTO PROFIL -->
+    <!-- ============================================
+         FOTO PROFIL
+         Cara pakai:
+         1. Taruh file foto kamu (JPG/PNG) di folder
+            yang sama dengan index.html ini
+         2. Ganti "foto-profil.jpg" di bawah dengan
+            nama file foto kamu
+         Contoh: src="foto-saya.png"
+    ============================================ -->
     <div class="avatar-wrap">
-      <div class="avatar">🎮</div>
+      <img
+        src="foto-profil.jpg"
+        alt="CoklatSusu"
+        class="avatar avatar-img"
+        onerror="this.style.display='none'; document.getElementById('avatar-fallback').style.display='flex';"
+      />
+      <!-- Fallback emoji kalau foto tidak ditemukan -->
+      <div class="avatar avatar-fallback" id="avatar-fallback" style="display:none;">🎮</div>
       <div class="online-dot"></div>
     </div>
 
     <!-- NAMA & BIO -->
     <div class="profile-name">CoklatSusu</div>
-    <div class="profile-bio">Streamer · Content Creator</div>
+    <div class="profile-bio">Content Creator</div>
 
     <!-- BADGES -->
     <div class="badges">
-      <span class="badge green">● Live Soon</span>
+      <span class="badge green">Kang Ngedit (kalau mood)</span>
       <span class="badge blue">ID 🇮🇩</span>
     </div>
 
     <!-- GRID LINK -->
     <div class="links">
 
-      <a href="https://instagram.com/USERNAME_KAMU" class="card instagram">
-        <div class="card-icon">📸</div>
+      <!-- INSTAGRAM -->
+      <a href="https://instagram.com/coklatssss" class="card instagram">
+        <div class="card-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="6" ry="6" stroke="white" stroke-width="2" fill="none"/>
+            <circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="2" fill="none"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+          </svg>
+        </div>
         <div class="card-label">Instagram</div>
-        <div class="card-sub">@CoklatSusu</div>
+        <div class="card-sub">@coklatssss</div>
       </a>
 
-      <a href="https://tiktok.com/@USERNAME_KAMU" class="card tiktok">
+      <!-- TIKTOK -->
+      <a href="https://tiktok.com/@coklatssss0" class="card tiktok">
         <div class="card-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
             <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5
@@ -45,15 +68,27 @@
           </svg>
         </div>
         <div class="card-label">TikTok</div>
-        <div class="card-sub">@CoklatSusu</div>
+        <div class="card-sub">@coklatssss0</div>
       </a>
 
-      <a href="https://saweria.co/USERNAME_KAMU" class="card saweria">
-        <div class="card-icon">☕</div>
+      <!-- SAWERIA -->
+      <a href="https://saweria.co/coklatssss" class="card saweria">
+        <div class="card-icon">
+          <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Koin -->
+            <circle cx="38" cy="20" r="14" fill="#f59e0b" stroke="#92400e" stroke-width="2"/>
+            <circle cx="38" cy="20" r="10" fill="#fbbf24"/>
+            <text x="38" y="25" text-anchor="middle" font-size="13" font-weight="900" fill="#92400e" font-family="Arial, sans-serif">S</text>
+            <!-- Tangan terbuka -->
+            <path d="M6 46 C6 40, 12 38, 18 38 L28 38 L36 42 L44 42 C47 42, 49 44, 49 46 C49 48, 47 50, 44 50 L26 50" stroke="#92400e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M6 46 L6 54" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
         <div class="card-label">Saweria</div>
         <div class="card-sub">Support me!</div>
       </a>
 
+      <!-- COMING SOON -->
       <a href="#" class="card coming-soon">
         <div class="card-icon">🔒</div>
         <div class="card-label">Coming Soon</div>
