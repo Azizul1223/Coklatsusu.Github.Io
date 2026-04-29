@@ -456,22 +456,6 @@ body::after {
 /* ========================
    ANIMATIONS
 ======================== */
-/* ========================
-   RIPPLE EFFECT
-======================== */
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  animation: ripple-anim 0.55s linear;
-  background: rgba(255, 255, 255, 0.18);
-  pointer-events: none;
-}
-
-@keyframes ripple-anim {
-  to { transform: scale(4); opacity: 0; }
-}
-
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
