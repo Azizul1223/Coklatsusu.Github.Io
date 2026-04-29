@@ -86,8 +86,15 @@
       <!-- ROBLOX -->
       <a href="https://www.roblox.com/users/2528925703/profile" class="card roblox" data-sound="roblox" target="_blank" rel="noopener noreferrer">
         <div class="card-icon">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.103 7.072L0 17.028 9.728 20.928 12.831 10.972zm9.455 5.008l-1.228 4.095 4.095 1.547 1.228-4.095zM14.272 3.072L11.169 13.028 20.897 16.928 24 6.972z"/>
+            <!-- Logo Roblox: kotak miring dengan lubang kotak di tengah -->
+          <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <g transform="rotate(-15, 50, 50)">
+              <!-- Kotak luar putih -->
+              <rect x="10" y="10" width="80" height="80" rx="4" fill="white"/>
+              <!-- Lubang hitam di tengah (menggunakan warna card untuk efek lubang) -->
+              <rect x="36" y="36" width="28" height="28" rx="2" fill="#0288d1"/>
+              <rect x="40" y="40" width="20" height="20" rx="1" fill="#000" opacity="0.85"/>
+            </g>
           </svg>
         </div>
         <div class="card-label">Roblox</div>
@@ -128,9 +135,6 @@
   </div>
 
   <script>
-    // ============================================================
-    //  SOUND ENGINE — Web Audio API (tidak butuh file eksternal)
-    // ============================================================
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let ctx = null;
 
@@ -195,13 +199,11 @@
         playTone({ freq: 440, type: 'square', duration: 0.08, volume: 0.2, delay: 0.12 });
       },
       steam() {
-        // Suara "klik mekanik" ala game launcher
         playNoise({ duration: 0.03, volume: 0.25 });
         playTone({ freq: 180, type: 'sine', duration: 0.15, volume: 0.3, delay: 0.02 });
         playTone({ freq: 360, type: 'sine', duration: 0.1,  volume: 0.2, delay: 0.1  });
       },
       roblox() {
-        // Suara "oof" khas Roblox — nada turun
         playTone({ freq: 500, type: 'sine', duration: 0.08, volume: 0.35 });
         playTone({ freq: 350, type: 'sine', duration: 0.12, volume: 0.3, delay: 0.07 });
         playTone({ freq: 250, type: 'sine', duration: 0.1,  volume: 0.2, delay: 0.17 });
