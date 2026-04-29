@@ -232,14 +232,8 @@ body {
   transform: scale(0.97);
 }
 
-/* Delay animasi social cards */
-.social-links .card:nth-child(1) { animation-delay: 0.25s; }
-.social-links .card:nth-child(2) { animation-delay: 0.35s; }
-.social-links .card:nth-child(3) { animation-delay: 0.45s; }
-.social-links .card:nth-child(4) { animation-delay: 0.55s; }
-
-/* Delay animasi support card */
-.support-links .card:nth-child(1) { animation-delay: 0.65s; }
+/* Semua card muncul barengan */
+.card { animation-delay: 0.3s; }
 
 /* =====================
    CARD FULL WIDTH (Saweria)
