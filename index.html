@@ -88,12 +88,14 @@
         <div class="card-icon">
             <!-- Logo Roblox: kotak miring dengan lubang kotak di tengah -->
           <svg width="30" height="30" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <mask id="roblox-mask">
+                <rect x="10" y="10" width="80" height="80" rx="4" fill="white"/>
+                <rect x="38" y="38" width="24" height="24" rx="2" fill="black"/>
+              </mask>
+            </defs>
             <g transform="rotate(-15, 50, 50)">
-              <!-- Kotak luar putih -->
-              <rect x="10" y="10" width="80" height="80" rx="4" fill="white"/>
-              <!-- Lubang hitam di tengah (menggunakan warna card untuk efek lubang) -->
-              <rect x="36" y="36" width="28" height="28" rx="2" fill="#0288d1"/>
-              <rect x="40" y="40" width="20" height="20" rx="1" fill="#000" opacity="0.85"/>
+              <rect x="10" y="10" width="80" height="80" rx="4" fill="white" mask="url(#roblox-mask)"/>
             </g>
           </svg>
         </div>
