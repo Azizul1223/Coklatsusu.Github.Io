@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coklatssss </title>
+  <title>CoklatSusu | Links</title>
   <link rel="stylesheet" href="style.css">
 
   <!-- Favicon -->
@@ -29,7 +29,7 @@
 
     <!-- NAMA & BIO -->
     <div class="profile-name">Coklatssss</div>
-    <div class="profile-bio">Content Creator</div>
+    <div class="profile-bio"><span id="typing-text"></span><span class="typing-cursor">|</span></div>
 
     <!-- BADGES -->
     <div class="badges">
@@ -284,6 +284,42 @@
     initStars();
     window.addEventListener('resize', () => { resize(); initStars(); });
     requestAnimationFrame(draw);
+  </script>
+
+  <script>
+    const phrases = [
+      'Content Creator',
+      'Kang Ngedit (kalau mood)',
+      'Gamer',
+      'ID 🇮🇩',
+
+    ];
+    const el = document.getElementById('typing-text');
+    let pi = 0, ci = 0, deleting = false, pauseTimer = null;
+
+    function type() {
+      const phrase = phrases[pi];
+      if (!deleting) {
+        el.textContent = phrase.slice(0, ++ci);
+        if (ci === phrase.length) {
+          deleting = true;
+          pauseTimer = setTimeout(type, 1800);
+          return;
+        }
+        setTimeout(type, 65 + Math.random() * 40);
+      } else {
+        el.textContent = phrase.slice(0, --ci);
+        if (ci === 0) {
+          deleting = false;
+          pi = (pi + 1) % phrases.length;
+          setTimeout(type, 400);
+          return;
+        }
+        setTimeout(type, 35);
+      }
+    }
+
+    setTimeout(type, 900);
   </script>
 
 </body>
