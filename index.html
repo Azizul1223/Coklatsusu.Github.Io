@@ -39,8 +39,11 @@
       <span class="badge blue">ID 🇮🇩</span>
     </div>
 
-    <!-- GRID LINK -->
-    <div class="links">
+    <!-- ===================== -->
+    <!--   SECTION: SOCIAL     -->
+    <!-- ===================== -->
+    <div class="section-title">Social Media</div>
+    <div class="links social-links">
 
       <!-- INSTAGRAM -->
       <a href="https://instagram.com/coklatssss" class="card instagram" data-sound="instagram" target="_blank" rel="noopener noreferrer">
@@ -69,8 +72,38 @@
         <div class="card-sub">@coklatssss0</div>
       </a>
 
-      <!-- SAWERIA -->
-      <a href="https://saweria.co/coklatssss" class="card saweria" data-sound="saweria" target="_blank" rel="noopener noreferrer">
+      <!-- STEAM -->
+      <a href="https://steamcommunity.com/id/USERNAME_STEAM" class="card steam" data-sound="steam" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.029 4.524 4.524s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.497 1.009 2.455-.397.957-1.494 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z"/>
+          </svg>
+        </div>
+        <div class="card-label">Steam</div>
+        <div class="card-sub">CoklatSusu</div>
+      </a>
+
+      <!-- ROBLOX -->
+      <a href="https://www.roblox.com/users/USERNAME_ROBLOX/profile" class="card roblox" data-sound="roblox" target="_blank" rel="noopener noreferrer">
+        <div class="card-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.103 7.072L0 17.028 9.728 20.928 12.831 10.972zm9.455 5.008l-1.228 4.095 4.095 1.547 1.228-4.095zM14.272 3.072L11.169 13.028 20.897 16.928 24 6.972z"/>
+          </svg>
+        </div>
+        <div class="card-label">Roblox</div>
+        <div class="card-sub">CoklatSusu</div>
+      </a>
+
+    </div>
+
+    <!-- ===================== -->
+    <!--   SECTION: SUPPORT    -->
+    <!-- ===================== -->
+    <div class="section-title">Support Me</div>
+    <div class="links support-links">
+
+      <!-- SAWERIA — full width -->
+      <a href="https://saweria.co/coklatssss" class="card saweria card-full" data-sound="saweria" target="_blank" rel="noopener noreferrer">
         <div class="card-icon">
           <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="38" cy="20" r="14" fill="#f59e0b" stroke="#92400e" stroke-width="2"/>
@@ -80,15 +113,10 @@
             <path d="M6 46 L6 54" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
           </svg>
         </div>
-        <div class="card-label">Saweria</div>
-        <div class="card-sub">Support me!</div>
-      </a>
-
-      <!-- COMING SOON -->
-      <a href="#" class="card coming-soon" data-sound="locked">
-        <div class="card-icon">🔒</div>
-        <div class="card-label">Coming Soon</div>
-        <div class="card-sub">Stay tuned</div>
+        <div class="saweria-text">
+          <div class="card-label">Saweria</div>
+          <div class="card-sub">Traktir kopi buat semangat ngedit ☕</div>
+        </div>
       </a>
 
     </div>
@@ -106,51 +134,41 @@
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let ctx = null;
 
-    // Buat AudioContext saat pertama kali ada interaksi user
     function getCtx() {
       if (!ctx) ctx = new AudioCtx();
       if (ctx.state === 'suspended') ctx.resume();
       return ctx;
     }
 
-    // --- Helper: buat nada pendek ---
-    function playTone({ freq = 440, type = 'sine', duration = 0.12, volume = 0.4, delay = 0, attack = 0.01, decay = 0.05 }) {
+    function playTone({ freq = 440, type = 'sine', duration = 0.12, volume = 0.4, delay = 0, attack = 0.01 }) {
       const c = getCtx();
       const osc = c.createOscillator();
       const gain = c.createGain();
       osc.connect(gain);
       gain.connect(c.destination);
-
       osc.type = type;
       osc.frequency.setValueAtTime(freq, c.currentTime + delay);
-
       gain.gain.setValueAtTime(0, c.currentTime + delay);
       gain.gain.linearRampToValueAtTime(volume, c.currentTime + delay + attack);
       gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + duration);
-
       osc.start(c.currentTime + delay);
       osc.stop(c.currentTime + delay + duration + 0.05);
     }
 
-    // --- Helper: noise pendek (gesekan / klik) ---
     function playNoise({ duration = 0.08, volume = 0.15, delay = 0 }) {
       const c = getCtx();
       const bufSize = c.sampleRate * duration;
       const buf = c.createBuffer(1, bufSize, c.sampleRate);
       const data = buf.getChannelData(0);
       for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
-
       const src = c.createBufferSource();
       src.buffer = buf;
-
       const gain = c.createGain();
       gain.gain.setValueAtTime(volume, c.currentTime + delay);
       gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + delay + duration);
-
       const filter = c.createBiquadFilter();
       filter.type = 'bandpass';
       filter.frequency.value = 1200;
-
       src.connect(filter);
       filter.connect(gain);
       gain.connect(c.destination);
@@ -158,93 +176,68 @@
       src.stop(c.currentTime + delay + duration + 0.05);
     }
 
-    // ============================================================
-    //  DEFINISI SUARA PER AKSI
-    // ============================================================
-
     const sounds = {
-
-      // Halaman pertama dibuka — jingle naik ringan
       pageLoad() {
         [523, 659, 784, 1047].forEach((f, i) => {
           playTone({ freq: f, type: 'triangle', duration: 0.18, volume: 0.25, delay: i * 0.1 });
         });
       },
-
-      // Hover card — klik lembut
       hover() {
         playTone({ freq: 880, type: 'sine', duration: 0.07, volume: 0.18, attack: 0.005 });
       },
-
-      // Klik Instagram — "pop" ceria
       instagram() {
         playTone({ freq: 660, type: 'sine',     duration: 0.12, volume: 0.35 });
         playTone({ freq: 990, type: 'triangle', duration: 0.12, volume: 0.2, delay: 0.07 });
       },
-
-      // Klik TikTok — beat pendek
       tiktok() {
         playNoise({ duration: 0.05, volume: 0.2 });
         playTone({ freq: 220, type: 'square', duration: 0.1, volume: 0.3, delay: 0.04 });
         playTone({ freq: 440, type: 'square', duration: 0.08, volume: 0.2, delay: 0.12 });
       },
-
-      // Klik Saweria — suara koin jatuh
+      steam() {
+        // Suara "klik mekanik" ala game launcher
+        playNoise({ duration: 0.03, volume: 0.25 });
+        playTone({ freq: 180, type: 'sine', duration: 0.15, volume: 0.3, delay: 0.02 });
+        playTone({ freq: 360, type: 'sine', duration: 0.1,  volume: 0.2, delay: 0.1  });
+      },
+      roblox() {
+        // Suara "oof" khas Roblox — nada turun
+        playTone({ freq: 500, type: 'sine', duration: 0.08, volume: 0.35 });
+        playTone({ freq: 350, type: 'sine', duration: 0.12, volume: 0.3, delay: 0.07 });
+        playTone({ freq: 250, type: 'sine', duration: 0.1,  volume: 0.2, delay: 0.17 });
+      },
       saweria() {
         [1047, 1319, 1568].forEach((f, i) => {
           playTone({ freq: f, type: 'triangle', duration: 0.14, volume: 0.28, delay: i * 0.06 });
         });
         playNoise({ duration: 0.04, volume: 0.1, delay: 0.03 });
       },
-
-      // Klik Coming Soon — suara "dikunci" / error kecil
-      locked() {
-        playTone({ freq: 300, type: 'sawtooth', duration: 0.1,  volume: 0.3 });
-        playTone({ freq: 250, type: 'sawtooth', duration: 0.12, volume: 0.25, delay: 0.09 });
-      },
-
-      // Klik avatar — suara notifikasi
       avatar() {
-        playTone({ freq: 784, type: 'sine',     duration: 0.1,  volume: 0.3 });
-        playTone({ freq: 988, type: 'sine',     duration: 0.1,  volume: 0.25, delay: 0.1 });
-        playTone({ freq: 1175, type: 'triangle',duration: 0.15, volume: 0.2,  delay: 0.2 });
+        playTone({ freq: 784,  type: 'sine',     duration: 0.1,  volume: 0.3  });
+        playTone({ freq: 988,  type: 'sine',     duration: 0.1,  volume: 0.25, delay: 0.1 });
+        playTone({ freq: 1175, type: 'triangle', duration: 0.15, volume: 0.2,  delay: 0.2 });
       }
     };
 
-    // ============================================================
-    //  PASANG EVENT LISTENER
-    // ============================================================
-
-    // Jalankan suara page load setelah halaman siap
     window.addEventListener('load', () => {
-      // Sedikit delay supaya browser sudah stabil
       setTimeout(() => sounds.pageLoad(), 400);
     });
 
-    // Klik & hover setiap card
     document.querySelectorAll('.card').forEach(card => {
       const soundName = card.dataset.sound;
-
-      // Hover
       card.addEventListener('mouseenter', () => sounds.hover());
-
-      // Klik (mousedown supaya terasa responsif)
       card.addEventListener('mousedown', () => {
         if (sounds[soundName]) sounds[soundName]();
       });
-
-      // Touch (mobile)
       card.addEventListener('touchstart', () => {
         sounds.hover();
         if (sounds[soundName]) sounds[soundName]();
       }, { passive: true });
     });
 
-    // Klik avatar
     const avatarWrap = document.getElementById('avatar-wrap');
     avatarWrap.addEventListener('click', () => sounds.avatar());
     avatarWrap.addEventListener('touchstart', () => sounds.avatar(), { passive: true });
-
   </script>
 
 </body>
