@@ -117,6 +117,29 @@
 
   </div>
 
+      <!-- SECTION: MUSIC PLAYER -->
+    <div class="section-title">Now Playing</div>
+
+    <div class="music-player">
+      <div class="music-cover">
+        <img src="cover.jpg" alt="Album Cover">
+      </div>
+
+      <div class="music-info">
+        <div class="music-title">Your Music</div>
+        <div class="music-artist">Coklatssss Playlist</div>
+
+        <div class="music-controls">
+          <button id="playBtn">⏸</button>
+          <input type="range" id="seekBar" value="0">
+        </div>
+      </div>
+
+      <audio id="bgMusic" autoplay loop>
+        <source src="musik/III (Sena x Justen Cover) - Sena Kiryuin.mp3" type="audio/mp3">
+      </audio>
+    </div>
+
   <script>
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let ctx = null;
@@ -315,6 +338,41 @@
 
     setTimeout(type, 900);
   </script>
+
+
+<script>
+  const music = document.getElementById('bgMusic');
+  const playBtn = document.getElementById('playBtn');
+  const seekBar = document.getElementById('seekBar');
+
+  // autoplay fix browser
+  window.addEventListener('load', async () => {
+    try {
+      await music.play();
+    } catch (e) {
+      console.log('Autoplay diblok browser');
+    }
+  });
+
+  playBtn.addEventListener('click', () => {
+    if (music.paused) {
+      music.play();
+      playBtn.textContent = '⏸';
+    } else {
+      music.pause();
+      playBtn.textContent = '▶';
+    }
+  });
+
+  music.addEventListener('timeupdate', () => {
+    seekBar.value = (music.currentTime / music.duration) * 100 || 0;
+  });
+
+  seekBar.addEventListener('input', () => {
+    music.currentTime = (seekBar.value / 100) * music.duration;
+  });
+</script>
+
 
 </body>
 </html>
