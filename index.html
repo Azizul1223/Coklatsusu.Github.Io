@@ -117,29 +117,6 @@
 
   </div>
 
-      <!-- SECTION: MUSIC PLAYER -->
-    <div class="section-title">Now Playing</div>
-
-    <div class="music-player">
-      <div class="music-cover">
-        <img src="cover.jpg" alt="Album Cover">
-      </div>
-
-      <div class="music-info">
-        <div class="music-title">Your Music</div>
-        <div class="music-artist">Coklatssss Playlist</div>
-
-        <div class="music-controls">
-          <button id="playBtn">⏸</button>
-          <input type="range" id="seekBar" value="0">
-        </div>
-      </div>
-
-      <audio id="bgMusic" autoplay loop>
-        <source src="musik/music.mp3" type="audio/mpeg">
-      </audio>
-    </div>
-
   <script>
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     let ctx = null;
