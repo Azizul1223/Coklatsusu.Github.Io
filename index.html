@@ -110,12 +110,18 @@
         </div>
       </a>
 
-    </div>
+    <<div class="divider"></div>
 
-    <div class="divider"></div>
-    <div class="footer">© 2026 CoklatSusu · All rights reserved</div>
+<!-- MUSIC BUTTON -->
+<div class="music-simple">
+  <button id="musicToggle">▶ Play Music</button>
 
-  </div>
+  <audio id="bgMusic" loop autoplay>
+    <source src="musik/music.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="footer">© 2026 CoklatSusu · All rights reserved</div>
 
   <script>
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -316,38 +322,33 @@
     setTimeout(type, 900);
   </script>
 
-
 <script>
   const music = document.getElementById('bgMusic');
-  const playBtn = document.getElementById('playBtn');
-  const seekBar = document.getElementById('seekBar');
+  const musicToggle = document.getElementById('musicToggle');
 
-  // autoplay fix browser
+  // volume lock 30%
+  music.volume = 0.3;
+
+  // autoplay
   window.addEventListener('load', async () => {
     try {
       await music.play();
-    } catch (e) {
-      console.log('Autoplay diblok browser');
+      musicToggle.textContent = '⏸ Pause Music';
+    } catch {
+      musicToggle.textContent = '▶ Play Music';
     }
   });
 
-  playBtn.addEventListener('click', () => {
+  musicToggle.addEventListener('click', async () => {
     if (music.paused) {
-      music.play();
-      playBtn.textContent = '⏸';
+      await music.play();
+      musicToggle.textContent = '⏸ Pause Music';
     } else {
       music.pause();
-      playBtn.textContent = '▶';
+      musicToggle.textContent = '▶ Play Music';
     }
   });
-
-  music.addEventListener('timeupdate', () => {
-    seekBar.value = (music.currentTime / music.duration) * 100 || 0;
-  });
-
-  seekBar.addEventListener('input', () => {
-    music.currentTime = (seekBar.value / 100) * music.duration;
-  });
 </script>
+
 </body>
 </html>
