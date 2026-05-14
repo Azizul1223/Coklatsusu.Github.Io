@@ -322,33 +322,5 @@
     setTimeout(type, 900);
   </script>
 
-<script>
-  const music = document.getElementById('bgMusic');
-  const musicToggle = document.getElementById('musicToggle');
-
-  // volume lock 30%
-  music.volume = 0.3;
-
-  // autoplay
-  window.addEventListener('load', async () => {
-    try {
-      await music.play();
-      musicToggle.textContent = '⏸ Pause Music';
-    } catch {
-      musicToggle.textContent = '▶ Play Music';
-    }
-  });
-
-  musicToggle.addEventListener('click', async () => {
-    if (music.paused) {
-      await music.play();
-      musicToggle.textContent = '⏸ Pause Music';
-    } else {
-      music.pause();
-      musicToggle.textContent = '▶ Play Music';
-    }
-  });
-</script>
-
 </body>
 </html>
